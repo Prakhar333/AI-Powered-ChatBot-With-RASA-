@@ -1,0 +1,87 @@
+version: "2.0"
+stories:
+- story: reserve table
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: booking
+  - action: utter_book
+  - intent: seats
+    entities:
+    - seats_slot: 2
+  - action: utter_name
+  - intent: name
+    entities:
+    - name_slot: Prakhar
+  - action: utter_phone
+  - intent: phone
+    entities:
+    - phone_slot: 1234567890
+  - action: utter_section
+  - intent: chooseAC
+  - action: utter_time
+  - intent: time
+    entities:
+    - CARDINAL: 7
+  - action: action_check_working_hours
+- story: reserve table2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: booking
+  - action: utter_book
+  - intent: seats
+    entities:
+    - seats_slot: 2
+  - action: utter_name
+  - intent: name
+    entities:
+    - name_slot: Prakhar
+  - action: utter_phone
+  - intent: phone
+    entities:
+    - phone_slot: 1234567890
+  - action: utter_section
+  - intent: chooseNONAC
+  - action: utter_time
+  - intent: time
+    entities:
+    - CARDINAL: 7
+  - action: action_check_working_hours
+- story: Story from Conversation ID a5e2534f5698478a8474ade937cd6876
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: booking
+  - action: utter_book
+  - intent: seats
+    entities:
+    - seats_slot: '2'
+  - slot_was_set:
+    - seats_slot: '2'
+  - action: utter_name
+  - intent: name
+    entities:
+    - name_slot: divyansh
+  - slot_was_set:
+    - name_slot: divyansh
+  - action: utter_phone
+  - intent: phone
+    entities:
+    - phone_slot: '1122334455'
+  - slot_was_set:
+    - phone_slot: '1122334455'
+  - action: utter_section
+  - intent: AC
+    entities:
+    - section_type: AC
+  - slot_was_set:
+    - section_type: AC
+  - action: utter_time
+  - intent: time
+    entities:
+    - CARDINAL: '8'
+    - time_of_day: pm
+  - slot_was_set:
+    - CARDINAL: '8'
+  - action: action_check_working_hours
