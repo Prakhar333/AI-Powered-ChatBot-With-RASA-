@@ -1,0 +1,157 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- booking:
+    use_entities: true
+- seats:
+    use_entities: true
+- AC:
+    use_entities: true
+- NON-AC:
+    use_entities: true
+- time:
+    use_entities: true
+- chooseAC:
+    use_entities: true
+- chooseNONAC:
+    use_entities: true
+- choose:
+    use_entities: true
+- phone:
+    use_entities: true
+- name:
+    use_entities: true
+- restart:
+    use_entities: true
+- out_of_scope:
+    use_entities: true
+- nlu_fallback:
+    use_entities: true
+entities:
+- times
+- section_type
+- time_of_day
+- CARDINAL
+- name_slot
+- phone_slot
+- seats_slot
+slots:
+  CARDINAL:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  name_slot:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  phone_slot:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  seats_slot:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  time_of_day:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  section_type:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+    - ac
+    - non-ac
+responses:
+  utter_book:
+  - text: How many seats would you like to reserve?
+  utter_section:
+  - buttons:
+    - payload: /chooseAC{{"section_type":"AC"}}
+      title: AC
+    - payload: /chooseNONAC{{"section_type":"NON-AC"}}
+      title: NON-AC
+    text: 'Which section would you like to reserve:'
+  utter_time:
+  - text: When would you like to book your reservation? (We are only open from 7pm to 10pm)
+  utter_name:
+  - text: Can you please tell us your name for making this reservation.
+  utter_phone:
+  - text: Please input your contact no and we are almost done.
+  utter_confirmation:
+  - text: You are making the reservation for {section_type} section.
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+  utter_greet:
+  - text: Hello I am here to book your reservations.
+  utter_custom:
+  - text: Sorry I didn't get that please try again!😅
+  utter_ask_affirmation:
+  - buttons:
+    - payload: /name
+      title: Name
+    - payload: /phone
+      title: phone
+    - payload: /out_of_scope
+      title: OR Something Else
+    text: Looks like something came out of the box, did you mean to enter your?
+  utter_ask_rephrase:
+  - text: I am really sorry for being a dumb bot, Can you please rephrase your input! 😅
+  utter_default:
+  - text: Sorry this is a default message ,didn't get that please try again!😅
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Hasta la vista
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+actions:
+- utter_section
+- utter_book
+- utter_confirmation
+- action_check_working_hours
+- utter_time
+- utter_greet
+- utter_name
+- utter_phone
+- action_restart
+- utter_custom
+- action_section
+- custom_fallback_action
+- action_default_ask_affirmation
+- utter_ask_affirmation
+- utter_ask_rephrase
+- out_of_scope
+- action_default_fallback
+forms: {}
+e2e_actions: []
